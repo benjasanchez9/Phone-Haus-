@@ -1,0 +1,103 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =========================================================
+   TOKENS DE MARCA — editar colores acá (formato R G B)
+   ========================================================= */
+:root {
+  --ink: 0 0 0;            /* Negro */
+  --paper: 246 246 243;    /* Off-white */
+  --surface: 255 255 255;  /* Blanco */
+  --line: 225 225 219;
+  --mute: 104 104 100;
+  --blue: 26 72 255;       /* Azul eléctrico Phone Haus — ajustar al tono exacto de marca */
+  --blue-deep: 16 52 214;
+  --blue-soft: 233 238 255;
+  --ok: 18 128 70;
+  --warn: 166 104 0;
+  --danger: 196 36 36;
+  --header-h: 64px;
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-padding-top: calc(var(--header-h) + 16px);
+  }
+  body {
+    @apply bg-paper text-ink antialiased;
+    font-feature-settings: "ss01", "cv11";
+  }
+  ::selection {
+    background: rgb(var(--blue));
+    color: white;
+  }
+  :focus-visible {
+    outline: 2px solid rgb(var(--blue));
+    outline-offset: 3px;
+    border-radius: 3px;
+  }
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  input[type="number"] {
+    -moz-appearance: textfield;
+  }
+}
+
+@layer components {
+  /* Titulares pesados y ensanchados, como las piezas de la marca */
+  .display {
+    font-weight: 820;
+    font-stretch: 116%;
+    letter-spacing: -0.025em;
+    line-height: 0.9;
+    text-transform: uppercase;
+    text-wrap: balance;
+  }
+  .display-sm {
+    font-weight: 780;
+    font-stretch: 110%;
+    letter-spacing: -0.015em;
+    line-height: 0.98;
+    text-transform: uppercase;
+    text-wrap: balance;
+  }
+  .lead {
+    @apply text-[1.0625rem] leading-relaxed text-mute sm:text-lg;
+    text-wrap: pretty;
+  }
+  /* Regla azul: elemento firma de la identidad web */
+  .rule {
+    @apply block h-[3px] w-10 bg-blue;
+  }
+  .container-site {
+    @apply mx-auto w-full max-w-site px-5 sm:px-8;
+  }
+  .section {
+    @apply py-16 sm:py-24;
+  }
+  .field {
+    @apply w-full rounded border border-line bg-surface px-4 py-3 text-base text-ink placeholder:text-mute/70 transition-colors focus:border-blue focus:outline-none focus:ring-2 focus:ring-blue/20;
+  }
+  .scrollbar-none {
+    scrollbar-width: none;
+  }
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

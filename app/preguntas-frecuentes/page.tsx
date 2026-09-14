@@ -29,7 +29,7 @@ export default function FaqPage() {
         crumbs={[{ label: "Inicio", href: "/" }, { label: "Preguntas frecuentes" }]}
       />
       <div className="container-site grid gap-12 pb-8 lg:grid-cols-[220px_1fr]">
-        <nav aria-label="Categorías" className="lg:sticky lg:top-[calc(var(--header-h)+24px)] lg:self-start">
+        <nav aria-label="Categorías" className="min-w-0 lg:sticky lg:top-[calc(var(--header-h)+24px)] lg:self-start">
           <ul className="-mx-5 flex gap-2 overflow-x-auto scrollbar-none px-5 lg:mx-0 lg:flex-col lg:gap-1 lg:px-0">
             {faqCategories.map((c) => (
               <li key={c.id} className="shrink-0">

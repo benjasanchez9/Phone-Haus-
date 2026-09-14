@@ -50,7 +50,7 @@ export function ProductCard({ product, priority, compact }: { product: Product; 
         </div>
         {!compact && <p className="mt-3 border-t border-line pt-3 text-xs text-mute">{warranty}</p>}
 
-        <div className="relative z-10 mt-4 flex gap-2">
+        <div className="relative z-10 mt-4 flex flex-wrap gap-2">
           <Link
             href={href}
             className="inline-flex h-11 flex-1 items-center justify-center rounded bg-ink px-4 text-sm font-semibold text-white transition-colors hover:bg-blue"

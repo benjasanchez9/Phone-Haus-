@@ -47,7 +47,7 @@ export default function AboutPage() {
 
       <section className="container-site pb-16 pt-12 sm:pb-24 sm:pt-20">
         <p className="text-sm font-semibold text-blue">{siteConfig.claim.charAt(0) + siteConfig.claim.slice(1).toLowerCase()}</p>
-        <h1 className="display mt-6 max-w-5xl text-[2.6rem] sm:text-[4.6rem] lg:text-[5.4rem]">
+        <h1 className="display mt-6 max-w-5xl text-[2.2rem] min-[380px]:text-[2.6rem] sm:text-[4.6rem] lg:text-[5.4rem]">
           Comprar tecnología debería ser simple. Pero, sobre todo, debería dar confianza.
         </h1>
       </section>

@@ -284,7 +284,7 @@ export function ComparatorView({ products }: { products: Product[] }) {
 
           {/* ---------- Recomendación ---------- */}
           <section className="mt-20 rounded-md bg-ink p-6 text-white sm:p-10" aria-labelledby="recomendacion">
-            <h2 id="recomendacion" className="display text-[2.1rem] sm:text-[3rem]">
+            <h2 id="recomendacion" className="display text-[1.3rem] min-[380px]:text-[1.7rem] min-[420px]:text-[2.1rem] sm:text-[3rem]">
               Nuestra recomendación
             </h2>
             <p className="mt-3 text-white/60">¿Qué es lo más importante para vos?</p>

@@ -6,7 +6,7 @@ export function PageHeader({ title, intro, crumbs, children }: { title: ReactNod
     <header className="container-site pb-10 pt-8 sm:pb-14 sm:pt-12">
       {crumbs && <Breadcrumb items={crumbs} className="mb-8" />}
       <span className="rule mb-5" aria-hidden />
-      <h1 className="display text-[2.6rem] sm:text-[4.2rem]">{title}</h1>
+      <h1 className="display text-[2rem] min-[380px]:text-[2.4rem] min-[420px]:text-[2.6rem] sm:text-[4.2rem]">{title}</h1>
       {intro && <p className="lead mt-5 max-w-xl">{intro}</p>}
       {children}
     </header>

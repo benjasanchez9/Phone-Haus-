@@ -56,7 +56,7 @@ export default async function ProductPage({ params }: { params: Params }) {
     color: product.color.name,
     sku: product.id,
     itemCondition: product.condition === "nuevo" ? "https://schema.org/NewCondition" : "https://schema.org/RefurbishedCondition",
-    ...(product.images[0] ? { image: `${siteConfig.url}${product.images[0]}` } : {}),
+    ...(product.images[0] ? { image: product.images[0].startsWith("http") ? product.images[0] : `${siteConfig.url}${product.images[0]}` } : {}),
     offers: {
       "@type": "Offer",
       priceCurrency: "USD",

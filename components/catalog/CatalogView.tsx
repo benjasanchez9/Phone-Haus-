@@ -1,6 +1,5 @@
 "use client";
 
-import { useSearchParams } from "next/navigation";
 import { useEffect, useId, useMemo, useState } from "react";
 import type { Condition, Product } from "@/types";
 import { ProductCard } from "@/components/product/ProductCard";
@@ -30,18 +29,25 @@ interface Filters {
 
 const normalize = (s: string) => s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 
-export function CatalogView({ products }: { products: Product[] }) {
-  const params = useSearchParams();
+export function CatalogView({
+  products,
+  initialCondition,
+  initialQuery = "",
+}: {
+  products: Product[];
+  /** Filtros que vienen en la dirección (?estado=…&q=…), leídos en el servidor. */
+  initialCondition?: string;
+  initialQuery?: string;
+}) {
   const priceCeil = Math.ceil(Math.max(...products.map((p) => p.priceUSD)) / 50) * 50;
   const priceFloor = Math.floor(Math.min(...products.map((p) => p.priceUSD)) / 50) * 50;
 
-  const initialCondition = params.get("estado");
   const empty: Filters = { condition: "todos", models: [], storages: [], colors: [], maxPrice: priceCeil };
   const [filters, setFilters] = useState<Filters>({
     ...empty,
     condition: initialCondition === "nuevo" || initialCondition === "seminuevo" ? initialCondition : "todos",
   });
-  const [query, setQuery] = useState(params.get("q") ?? "");
+  const [query, setQuery] = useState(initialQuery);
   const [sort, setSort] = useState<SortId>("destacados");
   const [drawer, setDrawer] = useState(false);
 

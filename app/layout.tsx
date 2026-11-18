@@ -46,8 +46,19 @@ const orgJsonLd = {
   name: siteConfig.shortName,
   slogan: siteConfig.claim,
   url: siteConfig.url,
+  description: siteConfig.description,
+  logo: `${siteConfig.url}/icon.svg`,
   sameAs: [siteConfig.instagram.url],
   areaServed: "UY",
+  currenciesAccepted: "USD, UYU",
+  paymentAccepted: siteConfig.payments.methods.map((m) => m.label).join(", "),
+  // Se agregan solos cuando se completan en data/site-config.ts
+  ...(siteConfig.location.address
+    ? { address: { "@type": "PostalAddress", streetAddress: siteConfig.location.address, addressCountry: "UY" } }
+    : {}),
+  ...(siteConfig.location.phone ? { telephone: siteConfig.location.phone } : {}),
+  ...(siteConfig.location.hours ? { openingHours: siteConfig.location.hours } : {}),
+  ...(siteConfig.email ? { email: siteConfig.email } : {}),
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

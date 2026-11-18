@@ -55,6 +55,8 @@ export interface Product {
   images: string[];
   used?: UsedDetails;
   shortDescription?: string;
+  /** Última modificación en /admin (ISO). Se usa en el sitemap. */
+  updatedAt?: string;
 }
 
 /* ---------- Especificaciones ---------- */

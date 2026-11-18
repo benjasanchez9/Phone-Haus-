@@ -27,14 +27,28 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   const { slug } = await params;
   const p = await getProductBySlug(slug);
   if (!p) return { title: "Equipo no encontrado" };
-  const title = `${p.name} ${formatStorage(p.storageGB)} ${p.color.name} ${conditionLabel[p.condition].toLowerCase()}`;
-  const description = `${title} en Phone Haus: ${formatUSD(p.priceUSD)}. ${p.condition === "nuevo" ? "Sellado, con garantía oficial de Apple." : `Batería ${p.used?.batteryHealth}%, verificado y con garantía de ${siteConfig.warranty.used.duration}.`}`;
+  const title = productTitle(p);
+  const description = `${title} en Phone Haus: ${formatUSD(p.priceUSD)}. ${productDetail(p)}`;
   return {
     title,
     description,
     alternates: { canonical: `/iphones/${p.slug}` },
-    openGraph: { title: `${title} | Phone Haus`, description, type: "website" },
+    // Definir openGraph acá reemplaza el de la raíz: hay que repetir la imagen.
+    openGraph: { title: `${title} | Phone Haus`, description, type: "website", images: [p.images[0] ?? "/opengraph-image"] },
   };
+}
+
+type ProductLike = NonNullable<Awaited<ReturnType<typeof getProductBySlug>>>;
+
+/** "iPhone 15 Pro 128 GB Blue Titanium seminuevo" */
+function productTitle(p: ProductLike) {
+  return `${p.name} ${formatStorage(p.storageGB)} ${p.color.name} ${conditionLabel[p.condition].toLowerCase()}`;
+}
+
+function productDetail(p: ProductLike) {
+  return p.condition === "nuevo"
+    ? "Sellado, con garantía oficial de Apple."
+    : `Batería ${p.used?.batteryHealth}%, verificado y con garantía de ${siteConfig.warranty.used.duration}.`;
 }
 
 export default async function ProductPage({ params }: { params: Params }) {
@@ -54,8 +68,10 @@ export default async function ProductPage({ params }: { params: Params }) {
     name: `${product.name} ${formatStorage(product.storageGB)} ${product.color.name}`,
     brand: { "@type": "Brand", name: "Apple" },
     color: product.color.name,
+    description: product.shortDescription ?? productDetail(product),
     sku: product.id,
-    itemCondition: product.condition === "nuevo" ? "https://schema.org/NewCondition" : "https://schema.org/RefurbishedCondition",
+    // Seminuevo = usado verificado (no reacondicionado de fábrica).
+    itemCondition: product.condition === "nuevo" ? "https://schema.org/NewCondition" : "https://schema.org/UsedCondition",
     ...(product.images[0] ? { image: product.images[0].startsWith("http") ? product.images[0] : `${siteConfig.url}${product.images[0]}` } : {}),
     offers: {
       "@type": "Offer",
@@ -99,6 +115,8 @@ export default async function ProductPage({ params }: { params: Params }) {
 
             <h1 className="display mt-5 text-[2.6rem] sm:text-[3.6rem]">
               <span className="normal-case">{displayName(product.name)}</span>
+              {/* Capacidad, color y estado se ven debajo; acá completan el título para Google. */}
+              <span className="sr-only"> {formatStorage(product.storageGB)} {product.color.name} {conditionLabel[product.condition].toLowerCase()}</span>
             </h1>
             <p className="mt-3 text-lg text-mute">
               {formatStorage(product.storageGB)}, {product.color.name}

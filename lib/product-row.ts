@@ -65,6 +65,7 @@ export function rowToProduct(row: ProductRow): Product {
     featured: row.destacado,
     releaseOrder: releaseOrderFor(row.model_id),
     images: row.imagenes ?? [],
+    updatedAt: row.actualizado_en,
   };
   if (row.condicion === "seminuevo") {
     product.used = {

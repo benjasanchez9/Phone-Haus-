@@ -1,4 +1,5 @@
 import { iphoneSpecs } from "@/data/iphone-specs";
+import { imagesFor } from "@/lib/renders";
 import type { Condition, CosmeticGrade, ModelId, Product, StockStatus } from "@/types";
 
 /** Fila tal como está guardada en la tabla `productos` de Supabase. */
@@ -64,7 +65,7 @@ export function rowToProduct(row: ProductRow): Product {
     stock: stockStatusFor(row.stock, row.condicion),
     featured: row.destacado,
     releaseOrder: releaseOrderFor(row.model_id),
-    images: row.imagenes ?? [],
+    images: imagesFor(row.imagenes ?? [], row.model_id, row.color_nombre, row.color_hex),
   };
   if (row.condicion === "seminuevo") {
     product.used = {

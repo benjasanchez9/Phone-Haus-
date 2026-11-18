@@ -4,6 +4,7 @@ import { iphoneSpecs } from "@/data/iphone-specs";
 import { siteConfig } from "@/data/site-config";
 import { supabaseConfigured } from "@/lib/supabase/config";
 import { createPublicClient } from "@/lib/supabase/public";
+import { imagesFor } from "@/lib/renders";
 import { PRODUCT_COLUMNS, rowToProduct, type ProductRow } from "@/lib/product-row";
 import type { Condition, IphoneSpecs, ModelId, Product } from "@/types";
 
@@ -16,7 +17,9 @@ import type { Condition, IphoneSpecs, ModelId, Product } from "@/types";
    ========================================================= */
 
 export const getProducts = cache(async (): Promise<Product[]> => {
-  if (!supabaseConfigured) return localProducts;
+  if (!supabaseConfigured) {
+    return localProducts.map((p) => ({ ...p, images: imagesFor(p.images, p.modelId, p.color.name, p.color.hex) }));
+  }
   const { data, error } = await createPublicClient()
     .from("productos")
     .select(PRODUCT_COLUMNS)

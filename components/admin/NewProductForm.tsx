@@ -134,7 +134,7 @@ export function NewProductForm({ onDone }: { onDone: () => void }) {
             onChange={(e) => setFile(e.target.files?.[0] ?? null)}
             className="mt-1 block w-full text-sm file:mr-3 file:h-10 file:rounded file:border-0 file:bg-ink/[0.06] file:px-4 file:font-semibold"
           />
-          <span className="mt-1 block text-xs text-mute">Sin foto, el sitio muestra la ilustración del modelo con el color elegido.</span>
+          <span className="mt-1 block text-xs text-mute">Sin foto, el sitio muestra la imagen del modelo en ese color (escribí el nombre oficial, ej. "Black Titanium" o "Negro"). Si no hay imagen para ese color, muestra la ilustración.</span>
         </label>
       </div>
 

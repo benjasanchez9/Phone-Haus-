@@ -1,14 +1,18 @@
-# Renders de producto
+# Imágenes de producto
 
-Subí acá los renders definitivos (PNG/WebP con fondo transparente, ~1200 px de alto).
+## Renders automáticos (`renders/`)
 
-Nombre sugerido: `<slug-del-producto>-1.png`, `<slug-del-producto>-2.png`
+`renders/<modelo>/<color>.webp` tiene la vista frontal de cada iPhone en sus
+colores oficiales. El sitio los usa solo cuando un artículo no tiene fotos
+propias: busca el modelo y el nombre del color cargado en /admin
+(en inglés o español, ej. "Black Titanium", "Titanio negro", "Negro").
 
-Después agregá las rutas en `data/products.ts`:
+La lista de modelos y colores disponibles está en `data/renders.ts`.
+Si un color no tiene imagen (ej. iPhone 17 Lavender), se muestra la
+ilustración de marca.
 
-```ts
-images: ["/products/iphone-17-pro-256-cosmic-orange-1.png"],
-```
+Fuente de los marcos: github.com/jonnyjackson26/device-frames-media
 
-Si `images` queda vacío, o si el archivo no existe, el sitio muestra automáticamente
-el render placeholder de marca (nunca una imagen rota).
+## Fotos propias
+
+Las fotos subidas desde /admin siempre tienen prioridad sobre los renders.

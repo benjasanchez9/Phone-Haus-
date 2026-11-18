@@ -8,6 +8,7 @@ import { buttonClass } from "@/components/ui/Button";
 import { formatStorage } from "@/utils/format";
 import { cn } from "@/utils/cn";
 import { stockStatusFor, type ProductRow } from "@/lib/product-row";
+import { renderFor } from "@/lib/renders";
 import { stockLabel } from "@/utils/format";
 import { uploadPhoto } from "./upload";
 import { inputClass, labelClass } from "./styles";
@@ -67,6 +68,7 @@ export function ProductItem({ row, name }: { row: ProductRow; name: string }) {
   }
 
   const photo = row.imagenes?.[0];
+  const preview = photo ?? renderFor(row.model_id, row.color_nombre, row.color_hex);
 
   return (
     <li className={cn("rounded-lg border border-line bg-surface p-4", !row.visible && "opacity-70")}>
@@ -74,9 +76,9 @@ export function ProductItem({ row, name }: { row: ProductRow; name: string }) {
         {/* Foto + nombre */}
         <div className="flex min-w-0 flex-1 items-center gap-4">
           <div className="flex h-20 w-16 shrink-0 items-center justify-center overflow-hidden rounded bg-paper">
-            {photo ? (
+            {preview ? (
               // eslint-disable-next-line @next/next/no-img-element
-              <img src={photo} alt="" className="h-full w-full object-contain" />
+              <img src={preview} alt="" className="h-full w-full object-contain" />
             ) : (
               <PhoneRender modelId={row.model_id} color={row.color_hex} className="h-16 w-auto" title={name} />
             )}

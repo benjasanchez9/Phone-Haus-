@@ -44,7 +44,7 @@ export default function FaqPage() {
         <div className="space-y-14">
           {faqCategories.map((c) => (
             <section key={c.id} id={c.id} aria-labelledby={`h-${c.id}`} className="scroll-mt-[calc(var(--header-h)+24px)]">
-              <h2 id={`h-${c.id}`} className="display-sm mb-4 text-[1.6rem] sm:text-[2rem]">
+              <h2 id={`h-${c.id}`} className="title mb-4 text-[1.6rem] sm:text-[2rem]">
                 {c.title}
               </h2>
               <Accordion items={c.items} />

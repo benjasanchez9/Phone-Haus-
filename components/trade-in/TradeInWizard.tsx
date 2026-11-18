@@ -321,7 +321,7 @@ function StepFrame({
 }) {
   return (
     <div>
-      <h2 ref={headingRef} tabIndex={-1} className="display-sm text-[1.9rem] outline-none sm:text-[2.5rem]">
+      <h2 ref={headingRef} tabIndex={-1} className="title text-[1.9rem] outline-none sm:text-[2.4rem]">
         {title}
       </h2>
       {hint && <p className="mt-3 text-mute">{hint}</p>}

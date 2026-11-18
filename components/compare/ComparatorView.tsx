@@ -179,7 +179,7 @@ export function ComparatorView({ products }: { products: Product[] }) {
           {/* ---------- Tabla comparativa ---------- */}
           <section className="mt-12" aria-labelledby="tabla">
             <div className="flex flex-wrap items-end justify-between gap-4">
-              <h2 id="tabla" className="display-sm text-[1.8rem] sm:text-[2.3rem]">
+              <h2 id="tabla" className="title text-[1.8rem] sm:text-[2.3rem]">
                 Lado a lado
               </h2>
               <label className="inline-flex cursor-pointer items-center gap-3 text-sm font-medium">
@@ -253,8 +253,7 @@ export function ComparatorView({ products }: { products: Product[] }) {
           {/* ---------- En qué destaca cada uno ---------- */}
           {highlights.length > 0 && (
             <section className="mt-20" aria-labelledby="destaca">
-              <span className="rule mb-5" aria-hidden />
-              <h2 id="destaca" className="display text-[2.2rem] sm:text-[3.2rem]">
+              <h2 id="destaca" className="title text-[1.9rem] sm:text-[2.6rem]">
                 ¿En qué destaca cada uno?
               </h2>
               <div className="mt-8 grid gap-3" style={{ gridTemplateColumns: `repeat(auto-fit, minmax(220px, 1fr))` }}>
@@ -284,7 +283,7 @@ export function ComparatorView({ products }: { products: Product[] }) {
 
           {/* ---------- Recomendación ---------- */}
           <section className="mt-20 rounded-md bg-ink p-6 text-white sm:p-10" aria-labelledby="recomendacion">
-            <h2 id="recomendacion" className="display text-[1.3rem] min-[380px]:text-[1.7rem] min-[420px]:text-[2.1rem] sm:text-[3rem]">
+            <h2 id="recomendacion" className="title text-[1.7rem] sm:text-[2.4rem]">
               Nuestra recomendación
             </h2>
             <p className="mt-3 text-white/60">¿Qué es lo más importante para vos?</p>

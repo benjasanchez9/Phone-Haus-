@@ -1,12 +1,12 @@
 "use client";
 
-import { useSearchParams } from "next/navigation";
 import { useEffect, useId, useMemo, useState } from "react";
 import type { Condition, Product } from "@/types";
 import { ProductCard } from "@/components/product/ProductCard";
 import { IconClose, IconFilter, IconSearch, IconWhatsApp } from "@/components/ui/Icon";
 import { Button, buttonClass } from "@/components/ui/Button";
 import { whatsappUrl } from "@/lib/whatsapp";
+import { siteConfig } from "@/data/site-config";
 import { formatStorage, formatUSD } from "@/utils/format";
 import { cn } from "@/utils/cn";
 
@@ -30,18 +30,25 @@ interface Filters {
 
 const normalize = (s: string) => s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 
-export function CatalogView({ products }: { products: Product[] }) {
-  const params = useSearchParams();
+export function CatalogView({
+  products,
+  initialCondition,
+  initialQuery = "",
+}: {
+  products: Product[];
+  /** Filtros que vienen en la dirección (?estado=…&q=…), leídos en el servidor. */
+  initialCondition?: string;
+  initialQuery?: string;
+}) {
   const priceCeil = Math.ceil(Math.max(...products.map((p) => p.priceUSD)) / 50) * 50;
   const priceFloor = Math.floor(Math.min(...products.map((p) => p.priceUSD)) / 50) * 50;
 
-  const initialCondition = params.get("estado");
   const empty: Filters = { condition: "todos", models: [], storages: [], colors: [], maxPrice: priceCeil };
   const [filters, setFilters] = useState<Filters>({
     ...empty,
     condition: initialCondition === "nuevo" || initialCondition === "seminuevo" ? initialCondition : "todos",
   });
-  const [query, setQuery] = useState(params.get("q") ?? "");
+  const [query, setQuery] = useState(initialQuery);
   const [sort, setSort] = useState<SortId>("destacados");
   const [drawer, setDrawer] = useState(false);
 
@@ -201,6 +208,12 @@ export function CatalogView({ products }: { products: Product[] }) {
         </aside>
 
         <section aria-label="Resultados">
+          <p className="mb-4 text-sm leading-relaxed text-mute">
+            Precios finales en dólares.
+            {siteConfig.payments.installments.enabled &&
+              ` Hasta ${siteConfig.payments.installments.maxInstallments} cuotas con ${siteConfig.payments.installments.provider}.`}{" "}
+            Garantía Apple de {siteConfig.warranty.new.duration} en nuevos y de {siteConfig.warranty.used.duration} en seminuevos.
+          </p>
           <div className="mb-5 flex items-center justify-between gap-4">
             <p className="text-sm text-mute" aria-live="polite">
               {results.length} {results.length === 1 ? "equipo" : "equipos"}
@@ -218,11 +231,9 @@ export function CatalogView({ products }: { products: Product[] }) {
           </div>
 
           {results.length > 0 ? (
-            <div className="grid grid-cols-1 gap-4 min-[480px]:grid-cols-2 xl:grid-cols-3">
+            <div className="grid grid-cols-2 gap-3 sm:gap-4 xl:grid-cols-3">
               {results.map((p, i) => (
-                <div key={p.id} className="animate-settle" style={{ animationDelay: `${Math.min(i, 8) * 30}ms` }}>
-                  <ProductCard product={p} priority={i < 2} />
-                </div>
+                <ProductCard key={p.id} product={p} priority={i < 2} />
               ))}
             </div>
           ) : (

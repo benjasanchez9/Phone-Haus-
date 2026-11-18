@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
-import { Suspense } from "react";
 import { getProducts } from "@/lib/catalog";
 import { CatalogView } from "@/components/catalog/CatalogView";
-import { CatalogSkeleton } from "@/components/catalog/CatalogSkeleton";
 import { PageHeader } from "@/components/ui/PageHeader";
 
 export const metadata: Metadata = {
@@ -11,8 +9,12 @@ export const metadata: Metadata = {
   alternates: { canonical: "/iphones" },
 };
 
-export default async function CatalogPage() {
-  const products = await getProducts();
+type SearchParams = Promise<{ estado?: string | string[]; q?: string | string[] }>;
+
+const first = (v?: string | string[]) => (Array.isArray(v) ? v[0] : v);
+
+export default async function CatalogPage({ searchParams }: { searchParams: SearchParams }) {
+  const [products, params] = await Promise.all([getProducts(), searchParams]);
   return (
     <>
       <PageHeader
@@ -20,9 +22,8 @@ export default async function CatalogPage() {
         intro="Nuevos sellados con garantía Apple y seminuevos verificados por Phone Haus."
         crumbs={[{ label: "Inicio", href: "/" }, { label: "iPhones" }]}
       />
-      <Suspense fallback={<CatalogSkeleton />}>
-        <CatalogView products={products} />
-      </Suspense>
+      {/* Sin Suspense: la lista sale completa en el HTML para que Google vea los productos. */}
+      <CatalogView products={products} initialCondition={first(params.estado)} initialQuery={first(params.q) ?? ""} />
     </>
   );
 }

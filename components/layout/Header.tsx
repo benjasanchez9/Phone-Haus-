@@ -89,6 +89,16 @@ export function Header() {
           </nav>
 
           <div className="flex items-center gap-2">
+            {/* En el celular, WhatsApp queda a mano junto al menú (es el canal de venta). */}
+            <a
+              href={whatsappUrl()}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex h-11 w-11 items-center justify-center rounded text-ink sm:hidden"
+              aria-label="Escribir por WhatsApp"
+            >
+              <IconWhatsApp size={23} />
+            </a>
             <a
               href={whatsappUrl()}
               target="_blank"

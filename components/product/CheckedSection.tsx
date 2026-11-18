@@ -6,7 +6,7 @@ export function CheckedSection() {
     <section className="rounded-md bg-ink p-6 text-white sm:p-10" aria-labelledby="checked">
       <div className="flex items-center gap-3 text-blue">
         <IconBadgeCheck size={26} />
-        <h2 id="checked" className="display-sm text-[1.5rem] text-white sm:text-[1.9rem]">
+        <h2 id="checked" className="title text-[1.5rem] text-white sm:text-[1.9rem]">
           Phone Haus Checked
         </h2>
       </div>

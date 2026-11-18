@@ -66,6 +66,15 @@
     text-transform: uppercase;
     text-wrap: balance;
   }
+  /* Títulos secundarios: misma voz ancha, sin mayúsculas. Las mayúsculas
+     (display) quedan para el título principal de cada página. */
+  .title {
+    font-weight: 760;
+    font-stretch: 108%;
+    letter-spacing: -0.02em;
+    line-height: 1.02;
+    text-wrap: balance;
+  }
   .lead {
     @apply text-[1.0625rem] leading-relaxed text-mute sm:text-lg;
     text-wrap: pretty;

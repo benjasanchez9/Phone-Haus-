@@ -8,8 +8,7 @@ export function PaymentsShipping() {
     <section className="section bg-surface" aria-label="Formas de pago y envíos">
       <div className="container-site grid gap-16 lg:grid-cols-2 lg:gap-20">
         <div id="pagos">
-          <span className="rule mb-5" aria-hidden />
-          <h2 className="display text-[2.2rem] sm:text-[3rem]">Formas de pago</h2>
+          <h2 className="title text-[1.8rem] sm:text-[2.3rem]">Formas de pago</h2>
           <ul className="mt-8 divide-y divide-line border-y border-line">
             {payments.methods.map((m) => (
               <li key={m.id} className="flex items-baseline justify-between gap-6 py-4">
@@ -26,12 +25,13 @@ export function PaymentsShipping() {
         </div>
 
         <div id="envios">
-          <span className="rule mb-5" aria-hidden />
-          <h2 className="display text-[2.2rem] sm:text-[3rem]">Envíos</h2>
+          <h2 className="title text-[1.8rem] sm:text-[2.3rem]">Envíos</h2>
           <p className="mt-6 flex items-center gap-3 text-xl font-bold tracking-tight">
             <IconTruck size={24} className="text-blue" />
             {shipping.headline}
           </p>
+          {/* Hasta tener tiempos y costos reales, una frase en vez de "A coordinar" repetido. */}
+          {shipping.zones.some((z) => z.time || z.cost) ? (
           <ul className="mt-6 grid gap-3 sm:grid-cols-2">
             {shipping.zones.map((z) => (
               <li key={z.id} className="rounded-md border border-line p-5">
@@ -49,6 +49,11 @@ export function PaymentsShipping() {
               </li>
             ))}
           </ul>
+          ) : (
+            <p className="mt-4 leading-relaxed text-mute">
+              A Montevideo y al interior.
+            </p>
+          )}
           <p className="mt-5 text-sm text-mute">
             {shipping.note}{" "}
             <Link href="/preguntas-frecuentes#envios" className="font-medium text-blue hover:underline">

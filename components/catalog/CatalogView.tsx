@@ -6,6 +6,7 @@ import { ProductCard } from "@/components/product/ProductCard";
 import { IconClose, IconFilter, IconSearch, IconWhatsApp } from "@/components/ui/Icon";
 import { Button, buttonClass } from "@/components/ui/Button";
 import { whatsappUrl } from "@/lib/whatsapp";
+import { siteConfig } from "@/data/site-config";
 import { formatStorage, formatUSD } from "@/utils/format";
 import { cn } from "@/utils/cn";
 
@@ -207,6 +208,12 @@ export function CatalogView({
         </aside>
 
         <section aria-label="Resultados">
+          <p className="mb-4 text-sm leading-relaxed text-mute">
+            Precios finales en dólares.
+            {siteConfig.payments.installments.enabled &&
+              ` Hasta ${siteConfig.payments.installments.maxInstallments} cuotas con ${siteConfig.payments.installments.provider}.`}{" "}
+            Garantía Apple de {siteConfig.warranty.new.duration} en nuevos y de {siteConfig.warranty.used.duration} en seminuevos.
+          </p>
           <div className="mb-5 flex items-center justify-between gap-4">
             <p className="text-sm text-mute" aria-live="polite">
               {results.length} {results.length === 1 ? "equipo" : "equipos"}
@@ -224,11 +231,9 @@ export function CatalogView({
           </div>
 
           {results.length > 0 ? (
-            <div className="grid grid-cols-1 gap-4 min-[480px]:grid-cols-2 xl:grid-cols-3">
+            <div className="grid grid-cols-2 gap-3 sm:gap-4 xl:grid-cols-3">
               {results.map((p, i) => (
-                <div key={p.id} className="animate-settle" style={{ animationDelay: `${Math.min(i, 8) * 30}ms` }}>
-                  <ProductCard product={p} priority={i < 2} />
-                </div>
+                <ProductCard key={p.id} product={p} priority={i < 2} />
               ))}
             </div>
           ) : (

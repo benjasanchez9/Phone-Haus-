@@ -146,9 +146,8 @@ export function TradeInResultView({
 
       {/* Elegir el nuevo iPhone */}
       <section className="mt-14" aria-labelledby="elegir">
-        <span className="rule mb-5" aria-hidden />
-        <h2 id="elegir" className="display text-[2.1rem] sm:text-[3rem]">
-          ¿Qué <span className="normal-case">iPHONE</span> querés llevarte?
+        <h2 id="elegir" className="title text-[1.9rem] sm:text-[2.6rem]">
+          ¿Qué iPhone querés llevarte?
         </h2>
         <p className="mt-3 text-mute">Elegí un equipo del catálogo para ver la diferencia a pagar.</p>
 

@@ -165,7 +165,7 @@ export default async function ProductPage({ params }: { params: Params }) {
             <div className="mt-6 flex flex-col gap-3">
               <a href={wa} target="_blank" rel="noopener noreferrer" className={buttonClass("primary", "lg", "hidden w-full sm:inline-flex")}>
                 <IconWhatsApp size={20} />
-                {soldOut ? "Consultar disponibilidad" : "Consultar / Comprar por WhatsApp"}
+                {soldOut ? "Consultar disponibilidad" : "Comprar por WhatsApp"}
               </a>
               <CompareToggle modelId={product.modelId} label="Agregar al comparador" block className="h-12" />
             </div>
@@ -212,7 +212,7 @@ export default async function ProductPage({ params }: { params: Params }) {
 
         {related.length > 0 && (
           <section className="mt-20" aria-labelledby="relacionados">
-            <h2 id="relacionados" className="display-sm text-[1.8rem] sm:text-[2.2rem]">
+            <h2 id="relacionados" className="title text-[1.8rem] sm:text-[2.2rem]">
               También te puede interesar
             </h2>
             <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">

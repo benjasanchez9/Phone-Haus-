@@ -7,7 +7,6 @@ export function TradeInTeaser({ exampleValue, targetName }: { exampleValue: stri
     <section className="bg-ink text-white" aria-labelledby="recambio-home">
       <div className="container-site grid gap-14 py-20 sm:py-28 lg:grid-cols-[1fr_1.1fr] lg:items-center">
         <div>
-          <span className="rule mb-6" aria-hidden />
           <h2 id="recambio-home" className="display text-[2.7rem] sm:text-[4.2rem]">
             Tu <span className="normal-case">iPHONE</span>
             <br />

@@ -10,11 +10,8 @@ export function CompareTeaser({ models }: { models: { specs: IphoneSpecs; color:
     <section className="section" aria-labelledby="comparador-home">
       <div className="container-site grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
         <div>
-          <span className="rule mb-5" aria-hidden />
-          <h2 id="comparador-home" className="display text-[2.6rem] sm:text-[4rem]">
-            ¿Cuál <span className="normal-case">iPHONE</span>
-            <br />
-            es para vos?
+          <h2 id="comparador-home" className="title text-[2.1rem] sm:text-[3rem]">
+            ¿Cuál iPhone es para vos?
           </h2>
           <p className="lead mt-5 max-w-md">
             Hasta tres modelos lado a lado: pantalla, cámaras, batería y precio real en Phone Haus.

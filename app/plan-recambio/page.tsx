@@ -17,7 +17,6 @@ export default async function TradeInPage() {
       <Breadcrumb items={[{ label: "Inicio", href: "/" }, { label: "Plan Recambio" }]} className="mb-8" />
       <div className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
         <aside className="lg:sticky lg:top-[calc(var(--header-h)+32px)] lg:self-start">
-          <span className="rule mb-5" aria-hidden />
           <h1 className="display text-[2.6rem] sm:text-[3.8rem]">Plan Recambio</h1>
           <p className="lead mt-5 max-w-sm">
             Tu <span className="normal-case">iPhone</span> también es parte de pago. Respondé seis preguntas y conocé cuánto vale hoy.

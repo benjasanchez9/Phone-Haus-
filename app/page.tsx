@@ -21,8 +21,13 @@ const COMPARE_TEASER: ModelId[] = ["iphone-17", "iphone-17-pro", "iphone-17-pro-
 
 export default async function HomePage() {
   const [featured, all] = await Promise.all([getFeaturedProducts(4), getProducts()]);
-  const spotlight = all.find((p) => p.modelId === "iphone-17-pro") ?? all[0];
-  const secondary = all.find((p) => p.modelId === "iphone-17-pro-max");
+  // Portada: el seminuevo disponible más reciente (y con mejor batería), que es
+  // donde la revisión importa. Si no hay seminuevos, el nuevo más reciente.
+  const available = all.filter((p) => p.stock !== "agotado");
+  const byRecency = (a: (typeof all)[number], b: (typeof all)[number]) =>
+    b.releaseOrder - a.releaseOrder || (b.used?.batteryHealth ?? 0) - (a.used?.batteryHealth ?? 0);
+  const spotlight =
+    available.filter((p) => p.condition === "seminuevo").sort(byRecency)[0] ?? available.sort(byRecency)[0] ?? all[0];
 
   // Ejemplo real calculado con el motor: iPhone 13 128 GB en excelente estado.
   const example = calculateTradeIn({
@@ -44,7 +49,7 @@ export default async function HomePage() {
 
   return (
     <>
-      <Hero spotlight={spotlight} secondary={secondary} />
+      {spotlight && <Hero spotlight={spotlight} />}
       <FeaturedProducts products={featured} />
       <TradeInTeaser exampleValue={example.status === "quoted" ? formatUSD(example.estimatedUSD) : "USD —"} targetName="iPhone 17 Pro" />
       <CompareTeaser models={compareModels} />

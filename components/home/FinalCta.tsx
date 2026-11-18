@@ -7,7 +7,7 @@ export function FinalCta({ title = "¿Ya sabés cuál querés?", text = "Escribi
     <section className="container-site py-16 sm:py-24">
       <div className="flex flex-col gap-8 border-y-2 border-ink py-12 sm:py-16 lg:flex-row lg:items-center lg:justify-between">
         <div>
-          <h2 className="display text-[2.6rem] sm:text-[4.4rem]">{title}</h2>
+          <h2 className="title text-[2.1rem] sm:text-[3rem]">{title}</h2>
           <p className="lead mt-4">{text}</p>
         </div>
         <a href={whatsappUrl()} target="_blank" rel="noopener noreferrer" className={buttonClass("primary", "lg", "shrink-0")}>

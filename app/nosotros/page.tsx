@@ -56,7 +56,6 @@ export default function AboutPage() {
         <div className="container-site grid gap-x-12 gap-y-12 py-16 sm:grid-cols-2 sm:py-24 lg:grid-cols-3">
           {blocks.map((b) => (
             <div key={b.title}>
-              <span className="rule mb-5" aria-hidden />
               <h2 className="text-xl font-bold tracking-tight">{b.title}</h2>
               <p className="mt-3 leading-relaxed text-mute">{b.text}</p>
             </div>

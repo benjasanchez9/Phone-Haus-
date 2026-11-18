@@ -53,11 +53,11 @@ export function Footer() {
             <FooterLink href="/nosotros">Nosotros</FooterLink>
             <FooterLink href="/preguntas-frecuentes">Preguntas frecuentes</FooterLink>
             <FooterLink href="/contacto">Contacto</FooterLink>
-            <li className="text-white/50">Local: {siteConfig.location.label}</li>
+            {siteConfig.location.address && <li className="text-white/60">Local: {siteConfig.location.address}</li>}
           </FooterCol>
         </div>
 
-        <div className="mt-16 flex flex-col gap-3 border-t border-white/10 pt-6 text-xs text-white/45 sm:flex-row sm:justify-between">
+        <div className="mt-16 flex flex-col gap-3 border-t border-white/10 pt-6 text-xs text-white/60 sm:flex-row sm:justify-between">
           <p>© {year} Phone Haus. Uruguay.</p>
           <p>Apple, iPhone y sus marcas son propiedad de Apple Inc. Phone Haus es un revendedor independiente.</p>
         </div>
@@ -69,7 +69,7 @@ export function Footer() {
 function FooterCol({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div>
-      <h2 className="text-sm font-semibold text-white/45">{title}</h2>
+      <h2 className="text-sm font-semibold text-white/60">{title}</h2>
       <ul className="mt-4 space-y-3 text-[0.95rem]">{children}</ul>
     </div>
   );

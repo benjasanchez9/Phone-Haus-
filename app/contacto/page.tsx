@@ -61,7 +61,7 @@ export default function ContactPage() {
         </div>
 
         <div>
-          <h2 className="display-sm mb-6 text-[1.6rem] sm:text-[2rem]">Dejanos tu consulta</h2>
+          <h2 className="title mb-6 text-[1.6rem] sm:text-[2rem]">Dejanos tu consulta</h2>
           <ContactForm />
         </div>
       </div>
